@@ -2,6 +2,7 @@ import { Container, Row, Col} from "react-bootstrap";
 import BannerImg from '../Assests/banner.jpg'
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 // import headerImg from "../Assets/main-img.png";
 // import collaborate from '../Assets/collaborate-logo.svg'
@@ -30,7 +31,8 @@ export const Banner = () => {
                         <TrackVisibility>
                             {({ isVisible }) =>
                                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                                    <img src={BannerImg} alt="Header Img"/>
+                                    {/* <img src={BannerImg} alt="Banner Img"  loading="lazy"/> */}
+                                    <LazyLoadImage src={BannerImg} />
                                 </div>}
                         </TrackVisibility>
                         

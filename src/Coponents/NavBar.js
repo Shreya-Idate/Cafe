@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav} from "react-bootstrap"
 import logo from '../Assests/logo.png';
+import {Logout} from '../App'
+import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar = ({Logout,name}) => {
     const [activeLink, setActiveLink] = useState('home');
     const [scrolled, seScrolled] = useState(false);    
 
@@ -22,6 +25,15 @@ export const NavBar = () => {
     const onUpdateActiveLink = (value) =>{
         setActiveLink(value);
     }
+    const history = useHistory();
+
+    const SwitchToStore = () => {
+        history.push("/Store");
+    }
+
+    const SwitchToHome = () => {
+        history.push("/");
+    }
 
     return (
         <Navbar bg="" expand="lg" className={scrolled ? "scrolled" : ""}>
@@ -34,10 +46,12 @@ export const NavBar = () => {
                 </Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
-                    <Nav.Link href="#home" className={activeLink === 'home'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('home')}>Home</Nav.Link>
-                    <Nav.Link href="#stores" className={activeLink === 'stores'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('stores')}>Stores</Nav.Link>
-                    <Nav.Link href="#contact" className={activeLink === 'contact'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('contact')}>FAQ/Contact</Nav.Link>
-                    <Nav.Link href="#login" className={activeLink === 'login'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('login')}>Login/SignUp</Nav.Link>
+                    <label className="NavLabel">Welcome, {name}</label>
+                    <Nav.Link href="" className={activeLink === 'home'?'active navbar-link':'navbar-link'} onClick={SwitchToHome}>Home</Nav.Link>
+                    <Nav.Link href="" className={activeLink === 'Store'?'active navbar-link':'navbar-link'} onClick={SwitchToStore}>Stores</Nav.Link>
+                    <Nav.Link href="" className={activeLink === 'Orders'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('Orders')}>Orders</Nav.Link>
+                    {/* <Nav.Link href="#login" className={activeLink === 'login'?'active navbar-link':'navbar-link'} onClick={() => onUpdateActiveLink('login')}>Login/SignUp</Nav.Link> */}
+                    <button onClick={Logout} className="button">Logout</button>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
